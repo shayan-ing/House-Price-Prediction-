@@ -45,6 +45,3 @@ This project involves building a machine learning model to predict house prices 
 - The trained model (`gbr.pkl`) is stored as a pickle file for future use or deployment.
 
 For any further inquiries or improvements, feel free to reach out.
-
-### Connect me:
-[Linkedin](https://www.linkedin.com/in/nirdesh-devadiya-55b408209)
