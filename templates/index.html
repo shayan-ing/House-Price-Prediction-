@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>House Price Predictor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <header class="hero">
+    <div class="badge">🏡 Machine Learning · Gradient Boosting</div>
+    <h1>House Price <span class="gradient-text">Predictor</span></h1>
+    <p class="subtitle">Enter home details and get an instant price estimate.</p>
+  </header>
+
+  <main class="container">
+    <form id="predictForm" class="card">
+      <div class="grid">
+        <div class="group">
+          <label>Overall Quality (1–10)</label>
+          <input type="number" name="OverallQual" min="1" max="10" value="7" required />
+        </div>
+        <div class="group">
+          <label>Overall Condition (1–10)</label>
+          <input type="number" name="OverallCond" min="1" max="10" value="5" required />
+        </div>
+        <div class="group">
+          <label>Year Built</label>
+          <input type="number" name="YearBuilt" min="1872" max="2010" value="2003" required />
+        </div>
+        <div class="group">
+          <label>Year Remodeled</label>
+          <input type="number" name="YearRemodAdd" min="1950" max="2010" value="2003" required />
+        </div>
+
+        <div class="group">
+          <label>Above‑ground Living Area (sq ft)</label>
+          <input type="number" name="GrLivArea" min="300" max="6000" value="1700" required />
+        </div>
+        <div class="group">
+          <label>Total Basement Area (sq ft)</label>
+          <input type="number" name="TotalBsmtSF" min="0" max="6000" value="900" required />
+        </div>
+        <div class="group">
+          <label>1st Floor Area (sq ft)</label>
+          <input type="number" name="1stFlrSF" min="300" max="5000" value="1100" required />
+        </div>
+        <div class="group">
+          <label>2nd Floor Area (sq ft)</label>
+          <input type="number" name="2ndFlrSF" min="0" max="2000" value="700" required />
+        </div>
+
+        <div class="group">
+          <label>Lot Area (sq ft)</label>
+          <input type="number" name="LotArea" min="1300" max="215000" value="9500" required />
+        </div>
+        <div class="group">
+          <label>Garage Cars</label>
+          <select name="GarageCars">
+            <option>0</option><option>1</option><option selected>2</option>
+            <option>3</option><option>4</option>
+          </select>
+        </div>
+        <div class="group">
+          <label>Garage Area (sq ft)</label>
+          <input type="number" name="GarageArea" min="0" max="1500" value="500" required />
+        </div>
+        <div class="group">
+          <label>Full Bathrooms</label>
+          <select name="FullBath">
+            <option>0</option><option>1</option><option selected>2</option>
+            <option>3</option><option>4</option>
+          </select>
+        </div>
+        <div class="group">
+          <label>Half Bathrooms</label>
+          <select name="HalfBath">
+            <option selected>0</option><option>1</option><option>2</option>
+          </select>
+        </div>
+        <div class="group">
+          <label>Bedrooms</label>
+          <select name="BedroomAbvGr">
+            <option>1</option><option>2</option><option selected>3</option>
+            <option>4</option><option>5</option><option>6</option>
+          </select>
+        </div>
+        <div class="group">
+          <label>Fireplaces</label>
+          <select name="Fireplaces">
+            <option selected>0</option><option>1</option><option>2</option><option>3</option>
+          </select>
+        </div>
+        <div class="group">
+          <label>Kitchen Quality</label>
+          <select name="KitchenQual">
+            <option value="Po">Poor</option>
+            <option value="Fa">Fair</option>
+            <option value="TA">Typical</option>
+            <option value="Gd" selected>Good</option>
+            <option value="Ex">Excellent</option>
+          </select>
+        </div>
+
+        <div class="group">
+          <label>Neighborhood</label>
+          <select name="Neighborhood">
+            <option>Blmngtn</option><option>Blueste</option><option>BrDale</option>
+            <option>BrkSide</option><option>ClearCr</option><option>CollgCr</option>
+            <option>Crawfor</option><option>Edwards</option><option>Gilbert</option>
+            <option>IDOTRR</option><option>MeadowV</option><option>Mitchel</option>
+            <option selected>NAmes</option><option>NPkVill</option><option>NWAmes</option>
+            <option>NoRidge</option><option>NridgHt</option><option>OldTown</option>
+            <option>SWISU</option><option>Sawyer</option><option>SawyerW</option>
+            <option>Somerst</option><option>StoneBr</option><option>Timber</option>
+            <option>Veenker</option>
+          </select>
+        </div>
+        <div class="group">
+          <label>Zoning</label>
+          <select name="MSZoning">
+            <option value="C (all)">C (all)</option>
+            <option value="FV">FV</option>
+            <option value="RH">RH</option>
+            <option value="RL" selected>RL</option>
+            <option value="RM">RM</option>
+          </select>
+        </div>
+        <div class="group">
+          <label>Building Type</label>
+          <select name="BldgType">
+            <option selected>1Fam</option><option>2fmCon</option>
+            <option>Duplex</option><option>Twnhs</option><option>TwnhsE</option>
+          </select>
+        </div>
+        <div class="group">
+          <label>House Style</label>
+          <select name="HouseStyle">
+            <option>1.5Fin</option><option>1.5Unf</option><option>1Story</option>
+            <option>2.5Fin</option><option>2.5Unf</option>
+            <option selected>2Story</option><option>SFoyer</option><option>SLvl</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="cta">
+        <span class="cta-text">Predict Price</span>
+        <span class="spinner"></span>
+      </button>
+    </form>
+
+    <div id="result" class="result hidden">
+      <div class="result-label">Estimated Sale Price</div>
+      <div class="result-price" id="price">$0</div>
+      <div class="result-note">Based on your inputs and a trained Gradient Boosting model.</div>
+    </div>
+
+    <div id="error" class="error hidden"></div>
+  </main>
+
+  <footer>
+    Built with Flask · scikit‑learn · ❤️
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
